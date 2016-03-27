@@ -10,7 +10,12 @@ import br.ufc.coop.java.dbdriver.util.DataBaseManager;
 
 public class StudentsManager {
 	
-	private DataBaseManager dbManager = new DataBaseManager();
+	private DataBaseManager dbManager;
+	
+	public StudentsManager() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		DataBaseManager.loadDriver();
+		dbManager = new DataBaseManager();
+	}
 	
 	public List<Student> getStudents() throws SQLException{
 		ResultSet rs = null;

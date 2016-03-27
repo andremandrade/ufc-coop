@@ -39,7 +39,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'joao','joao@gmail.com','Sistemas de Informacao'),(2,'juliana','maria@gmail.com','Engenharia Civil');
+INSERT INTO `student` VALUES (1,'joao','joao@gmail.com','Sistemas de Informacao'),(2,'maria','maria@gmail.com','Engenharia Civil');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -8,31 +8,40 @@ import br.ufc.coop.java.dbdriver.util.InputManager;
 
 public class Menu {
 
-	public static StudentsManager studentsManager = new StudentsManager();
+	public static StudentsManager studentsManager;
 
 	public static void showMain() {
+		while (true) {
+			
+			try {
+				studentsManager = new StudentsManager();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+				return;
+			}
+			
+			System.out.println("Choose an option bellow:");
+			System.out.println("1. List students");
+			System.out.println("2. Add student");
+			System.out.println("3. Update Student");
+			System.out.println("4. Remove Student");
 
-		System.out.println("Choose an option bellow:");
-		System.out.println("1. List students");
-		System.out.println("2. Add student");
-		System.out.println("3. Update Student");
-		System.out.println("4. Remove Student");
+			int choose = InputManager.readInt();
 
-		int choose = InputManager.readInt();
-
-		switch (choose) {
-		case 1:
-			showList();
-			break;
-		case 2:
-			showAdd();
-			break;
-		case 3:
-			showUpdate();
-			break;
-		default:
-			System.out.println("Invalid option!");
-			break;
+			switch (choose) {
+			case 1:
+				showList();
+				break;
+			case 2:
+				showAdd();
+				break;
+			case 3:
+				showUpdate();
+				break;
+			default:
+				System.out.println("Invalid option!");
+				break;
+			}
 		}
 	}
 
