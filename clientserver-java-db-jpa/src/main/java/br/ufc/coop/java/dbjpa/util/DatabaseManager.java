@@ -9,6 +9,7 @@ public class DatabaseManager {
 	private EntityManagerFactory entityManagerFactory;
 
 	public void setUp() throws Exception {
+		Class.forName("com.mysql.jdbc.Driver");
 		entityManagerFactory = Persistence.createEntityManagerFactory( "school-database" );
 	}
 	

@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.ufc.coop.java.dbjpa</groupId>
-	<artifactId>ufc-coop-java-db-jpa</artifactId>
+	<artifactId>school-jpa</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>ufc-coop-java-db-jpa</name>
+	<name>School App - BD JPA</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -38,4 +38,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
