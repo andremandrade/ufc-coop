@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>School</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+</head>
+<body ng-app="school">
+	<div ng-controller="StudentsController as ctl">
+		<h1>Students</h1>
+		<hr/>
+		<label>Name</label>
+		<input type="text" ng-model="ctl.newStudent.name"><br/>
+		<label>Email</label>
+		<input type="text" ng-model="ctl.newStudent.email"><br/>
+		<label>Course</label>
+		<input type="text" ng-model="ctl.newStudent.course"><br/>
+		<button ng-click="ctl.addStudent(ctl.newStudent)">Add</button>
+		<hr/>
+		<table border="1">
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Course</th>
+			</tr>
+			<tr ng-repeat="student in ctl.students">
+				<td>{{student.id}}</td>
+				<td>{{student.name}}</td>
+				<td>{{student.email}}</td>
+				<td>{{student.course}}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<script type="text/javascript">
+		school = angular.module('school', []);
+		school.controller('StudentsController', ['$http', function($http){
+			var controller = this;
+			
+			controller.newStudent = {};
+			
+			controller.students = [];
+			controller.loadStudents = function(){
+				$http.get('/api/student').then(
+					function success(response){
+						controller.students = response.data;
+					}
+				);
+			}
+			controller.loadStudents();
+			
+			controller.addStudent = function(student){
+				$http.post('/api/student', student).then(function success(response){
+					controller.newStudent = {};
+					controller.loadStudents();
+				})
+			}
+		}]);
+	</script>
+</body>
+</html>

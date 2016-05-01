@@ -10,7 +10,7 @@ public class DatabaseManager {
 
 	public void setUp() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		entityManagerFactory = Persistence.createEntityManagerFactory( "school-database" );
+		entityManagerFactory = Persistence.createEntityManagerFactory("school-database");
 	}
 	
 	public EntityManager getEntityManager(){
