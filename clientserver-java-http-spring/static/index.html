@@ -4,37 +4,56 @@
 <meta charset="UTF-8">
 	<title>School</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>
 </head>
 <body ng-app="school">
-	<div ng-controller="StudentsController as ctl">
-		<h1>Students</h1>
-		<hr/>
-		<label>Name</label>
-		<input type="text" ng-model="ctl.newStudent.name"><br/>
-		<label>Email</label>
-		<input type="text" ng-model="ctl.newStudent.email"><br/>
-		<label>Course</label>
-		<input type="text" ng-model="ctl.newStudent.course"><br/>
-		<button ng-click="ctl.addStudent(ctl.newStudent)">Add</button>
-		<hr/>
-		<table border="1">
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Course</th>
-			</tr>
-			<tr ng-repeat="student in ctl.students">
-				<td>{{student.id}}</td>
-				<td>{{student.name}}</td>
-				<td>{{student.email}}</td>
-				<td>{{student.course}}</td>
-			</tr>
-		</table>
-	</div>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a ui-sref="student">Student</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+	  <div ui-view></div>
+    </div>
+	
 	
 	<script type="text/javascript">
-		school = angular.module('school', []);
+		school = angular.module('school', ['ui.router']);
+		
+		school.config(function($stateProvider, $urlRouterProvider) {
+			  //
+			  // For any unmatched url, redirect to /state1
+			  $urlRouterProvider.otherwise("/main");
+			  //
+			  // Now set up the states
+			  $stateProvider
+			    .state('main', {
+			      url: "/main",
+			      templateUrl: "main.html"
+			    })
+			    .state('student', {
+			      url: "/student",
+			      templateUrl: "student.html"
+			    })
+			});
+		
 		school.controller('StudentsController', ['$http', function($http){
 			var controller = this;
 			
