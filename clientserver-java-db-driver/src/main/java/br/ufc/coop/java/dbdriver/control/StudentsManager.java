@@ -1,5 +1,6 @@
 package br.ufc.coop.java.dbdriver.control;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,19 +11,20 @@ import br.ufc.coop.java.dbdriver.util.DataBaseManager;
 
 public class StudentsManager {
 	
-	private DataBaseManager dbManager;
-	
 	public StudentsManager() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		DataBaseManager.loadDriver();
-		dbManager = new DataBaseManager();
 	}
 	
 	public List<Student> getStudents() throws SQLException{
+		Connection conn = DataBaseManager.getConnection();
 		ResultSet rs = null;
-		List<Student> students = new ArrayList<Student>();
-		Student student;
 		try {
-			rs = dbManager.executeQuery("SELECT * FROM student");
+			List<Student> students = new ArrayList<Student>();
+			Student student;
+			
+			conn = DataBaseManager.getConnection();
+			
+			rs = DataBaseManager.executeQuery("SELECT * FROM student", conn);
 			
 			while (rs.next()){
 				student = new Student();
@@ -38,7 +40,8 @@ public class StudentsManager {
 		} catch (SQLException e) {
 			throw e;
 		} finally {
-			rs.close();
+			if(rs != null) rs.close();
+			if(conn != null) conn.close();
 		}
 	}
 
@@ -46,13 +49,15 @@ public class StudentsManager {
 		String sqlCommand = "INSERT INTO student (name, email, course) VALUES (\"" + 
 				student.getName() + "\", \"" + student.getEmail() + 
 				"\", \"" + student.getCourse() + "\" )";
-		return dbManager.executeInsert(sqlCommand);
+		System.out.println(sqlCommand);
+		return DataBaseManager.executeInsert(sqlCommand);
 	}
 
 	public void updateStudent(int idToUpdate, Student student) throws SQLException {
 		String sqlCommand = "UPDATE student SET name = \"" + 
 				student.getName() + "\", email = \"" + student.getEmail() + 
 				"\", course = \"" + student.getCourse() + "\" WHERE id = " + idToUpdate;
-		dbManager.executeUpdate(sqlCommand);
+		System.out.println(sqlCommand);
+		DataBaseManager.executeUpdate(sqlCommand);
 	}
 }
