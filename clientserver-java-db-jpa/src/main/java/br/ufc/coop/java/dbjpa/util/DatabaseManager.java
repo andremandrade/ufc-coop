@@ -6,14 +6,18 @@ import javax.persistence.Persistence;
 
 public class DatabaseManager {
 	
-	private EntityManagerFactory entityManagerFactory;
-
-	public void setUp() throws Exception {
-		Class.forName("com.mysql.jdbc.Driver");
-		entityManagerFactory = Persistence.createEntityManagerFactory("school-database");
-	}
+	private static EntityManagerFactory entityManagerFactory;
 	
-	public EntityManager getEntityManager(){
+	static{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			entityManagerFactory = Persistence.createEntityManagerFactory("school-database");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static EntityManager getEntityManager(){
 		return entityManagerFactory.createEntityManager();
 	}
 }

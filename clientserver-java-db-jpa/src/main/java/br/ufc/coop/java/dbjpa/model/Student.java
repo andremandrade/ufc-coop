@@ -1,12 +1,13 @@
 package br.ufc.coop.java.dbjpa.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.ManyToMany;
 
 @Entity
-@Table(name="student")
 public class Student {
 
 	@Id
@@ -15,6 +16,8 @@ public class Student {
 	private String name;
 	private String email;
 	private String course;
+	@ManyToMany(mappedBy="students")
+	private List<Discipline> disciplines;
 	
 	public long getId() {
 		return id;
@@ -40,9 +43,16 @@ public class Student {
 	public void setCourse(String course) {
 		this.course = course;
 	}
+
 	@Override
 	public String toString() {
 		return "{\"id\"=" + id + ", \"name\"=" + name + "\", \"email\"=\"" + email + "\", \"course\"=\"" + course + "\"}";
+	}
+	public List<Discipline> getDisciplines() {
+		return disciplines;
+	}
+	public void setDisciplines(List<Discipline> disciplines) {
+		this.disciplines = disciplines;
 	}
 
 }

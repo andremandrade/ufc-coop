@@ -9,12 +9,10 @@ import br.ufc.coop.java.dbjpa.util.DatabaseManager;
 
 public class StudentsManager {
 
-	private DatabaseManager databaseManager = new DatabaseManager();
 	private EntityManager entityManager;
 	
 	public StudentsManager() throws Exception {
-		databaseManager.setUp();
-		entityManager = databaseManager.getEntityManager();
+		entityManager = DatabaseManager.getEntityManager();
 	}
 
 	public List<Student> getStudents() {
@@ -27,7 +25,6 @@ public class StudentsManager {
 	public long addStudent(Student student){
 		entityManager.getTransaction().begin();
 		entityManager.persist(student);
-		entityManager.flush();
 		entityManager.getTransaction().commit();
 		return student.getId();
 	}
@@ -36,7 +33,6 @@ public class StudentsManager {
 		entityManager.getTransaction().begin();
 		student.setId(idToUpdate);
 		entityManager.merge(student);
-		entityManager.flush();
 		entityManager.getTransaction().commit();
 	}
 }
