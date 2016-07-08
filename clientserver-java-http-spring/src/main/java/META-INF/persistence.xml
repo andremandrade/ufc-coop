@@ -8,6 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
 		<class>br.ufc.coop.java.dbjpa.model.Student</class>
+		<class>br.ufc.coop.java.dbjpa.model.Discipline</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/school" />
