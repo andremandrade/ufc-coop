@@ -7,7 +7,7 @@ import com.google.gson.Gson;
  */
 public class Student {
 
-    public static final String STUDENT_API_URL = "http://192.168.0.104:8080/api/student";
+    public static final String STUDENT_API_URL = "https://192.168.1.6:8443";
 
     private String name;
     private String email;

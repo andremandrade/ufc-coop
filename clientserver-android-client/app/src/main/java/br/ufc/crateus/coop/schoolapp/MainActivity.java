@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import br.ufc.crateus.coop.schoolapp.http.RequestQueueManager;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String LIST_STUDENTS = "List Students";
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        RequestQueueManager.getInstance(getApplicationContext());
     }
 
     private void openAddStudent() {
